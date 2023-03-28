@@ -39,13 +39,49 @@ app.get('/restaurants/new', (req, res) => {
   return res.render('new')
 })
 
-app.post('/restaurants', (req, res) => {
+app.post('/restaurants/new', (req, res) => {
   const name = req.body.name
   const category = req.body.category
   const rating = req.body.rating
-  return Restaurant.create({ name, category, rating })
+  const location = req.body.location
+  const phone = req.body.phone
+  const description = req.body.description
+  const image = req.body.image
+  return Restaurant.create({ name, category, rating, location, phone, description, image })
     .then(() => res.redirect('/'))
     .catch((error) => console.log(error))
+})
+
+app.get('/restaurants/:id/edit', (req, res) => {
+  const id = req.params.id
+  return Restaurant.findById(id)
+    .lean()
+    .then((restaurant) => res.render('edit', { restaurant }))
+    .catch((error) => console.log(error))
+})
+
+app.post('/restaurants/:id/edit', (req, res) => {
+  const id = req.params.id
+  const name = req.body.name
+  const category = req.body.category
+  const rating = req.body.rating
+  const location = req.body.location
+  const phone = req.body.phone
+  const description = req.body.description
+  const image = req.body.image
+  return Restaurant.findById(id)
+    .then((restaurant) => {
+      restaurant.name = name
+      restaurant.category = category
+      restaurant.rating = rating
+      restaurant.location = location
+      restaurant.phone = phone
+      restaurant.description = description
+      restaurant.image = image
+      return restaurant.save()
+        .then(() => res.redirect(`/restaurants/${id}`))
+        .catch((error) => console.log(error))
+    })
 })
 
 app.get('/restaurants/:id', (req, res) => {
@@ -63,6 +99,8 @@ app.get('/search', (req, res) => {
   })
   res.render('index', { restaurants, keyword })
 })
+
+
 
 app.listen(port, () => {
   console.log(`Express is listening on localhost:${port}`)
