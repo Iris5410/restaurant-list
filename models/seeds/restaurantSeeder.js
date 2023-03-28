@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const Restaurant = require('../restaurant')
 const restaurantList = require('../../restaurant.json').results
 
+
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
@@ -18,7 +19,8 @@ db.once('open', () => {
       location: `${restaurantList[i].location}`,
       phone: `${restaurantList[i].phone}`,
       description: `${restaurantList[i].description}`,
-      image: `${restaurantList[i].image}`
+      image: `${restaurantList[i].image}`,
+      rating: `${restaurantList[i].rating}`
     })
   }
   console.log('done')

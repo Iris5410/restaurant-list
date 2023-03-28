@@ -20,6 +20,9 @@ const restaurantSchema = new Schema({
   },
   image: {
     type: String
+  },
+  rating: {
+    type: Number
   }
 })
 module.exports = mongoose.model('Restaurant', restaurantSchema)
