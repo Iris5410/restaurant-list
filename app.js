@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const restaurantList = require('./restaurant.json').results
 const Restaurant = require('./models/restaurant')
+const restaurant = require('./models/restaurant')
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
@@ -47,9 +48,12 @@ app.post('/restaurants', (req, res) => {
     .catch((error) => console.log(error))
 })
 
-app.get('/restaurants/:restaurant_id', (req, res) => {
-  const restaurants = restaurantList.find(restaurant => restaurant.id.toString() ===  req.params.restaurant_id)
-  res.render('show', {restaurant: restaurants})
+app.get('/restaurants/:id', (req, res) => {
+  const id = req.params.id
+  return Restaurant.findById(id)
+    .lean()
+    .then((restaurant) => res.render('show', { restaurant }))
+    .catch((error) => console.log(error))
 })
 
 app.get('/search', (req, res) => {
