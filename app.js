@@ -62,22 +62,17 @@ app.get('/restaurants/:id/edit', (req, res) => {
 
 app.post('/restaurants/:id/edit', (req, res) => {
   const id = req.params.id
-  const name = req.body.name
-  const category = req.body.category
-  const rating = req.body.rating
-  const location = req.body.location
-  const phone = req.body.phone
-  const description = req.body.description
-  const image = req.body.image
+  const editRestaurant = req.body
+
   return Restaurant.findById(id)
     .then((restaurant) => {
-      restaurant.name = name
-      restaurant.category = category
-      restaurant.rating = rating
-      restaurant.location = location
-      restaurant.phone = phone
-      restaurant.description = description
-      restaurant.image = image
+      restaurant.name = editRestaurant.name
+      restaurant.category = editRestaurant.category
+      restaurant.rating = editRestaurant.rating
+      restaurant.location = editRestaurant.location
+      restaurant.phone = editRestaurant.phone
+      restaurant.description = editRestaurant.description
+      restaurant.image = editRestaurant.image
       return restaurant.save()
         .then(() => res.redirect(`/restaurants/${id}`))
         .catch((error) => console.log(error))
