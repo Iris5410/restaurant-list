@@ -46,11 +46,13 @@
             </div>
             
           </div>
-          <a href="/restaurants/{{this._id}}/edit" class="text-secondary">Edit</a>
-          <a href="/restaurants/{{this._id}}" class="text-secondary">Detail</a>
-          <form action="/restaurants/{{this._id}}/delete" method="POST" style="display:inline">
-            <button type="submit">Delete</button>
-          </form>
+          <div class="card-footer d-flex justify-content-end flex-wrap">
+            <a href="/restaurants/{{this._id}}/edit"><button class="btn btn-link btn-sm">Edit</button></a>
+            <a href="/restaurants/{{this._id}}"><button class="btn btn-link btn-sm">Detail</button></a>
+            <form action="/restaurants/{{this._id}}?_method=DELETE" method="POST" style="display:inline">
+              <button type="submit" class="btn btn-danger btn-sm text-white">Delete</button>
+            </form>
+          </div>
       </div>
         {{/each}}
         

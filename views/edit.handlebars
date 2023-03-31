@@ -1,4 +1,4 @@
-<form action="/restaurants/{{restaurant._id}}/edit" method="POST">
+<form action="/restaurants/{{restaurant._id}}?_method=PUT" method="POST">
   <input type="text" name="name" placeholder="name" style="display:block" value="{{restaurant.name}}">
   <input type="text" name="category" placeholder="category" style="display:block" value="{{restaurant.category}}">
   <input type="text" name="rating" placeholder="rating" style="display:block" value="{{restaurant.rating}}">
