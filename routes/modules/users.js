@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const passport = require('passport')
 
 const User = require('../../models/users')
 const Restaurant = require('../../models/restaurants')
@@ -7,6 +8,11 @@ const Restaurant = require('../../models/restaurants')
 router.get('/login', (req, res) => {
   res.render('login')
 })
+
+router.post('/login', passport.authenticate('local', {
+  failureRedirect: 'users/login',
+  successRedirect: '/'
+}))
 
 router.post('/register', (req, res) => {
   const { name, email, password, confirmPassword } = req.body
@@ -36,5 +42,6 @@ router.post('/register', (req, res) => {
 router.get('/register', (req, res) => {
   res.render('register')
 })
+
 
 module.exports = router
