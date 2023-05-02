@@ -9,11 +9,13 @@ router.get('/login', (req, res) => {
   res.render('login')
 })
 
+// 登入
 router.post('/login', passport.authenticate('local', {
   failureRedirect: 'users/login',
   successRedirect: '/'
 }))
 
+// 註冊
 router.post('/register', (req, res) => {
   const { name, email, password, confirmPassword } = req.body
 
@@ -43,5 +45,10 @@ router.get('/register', (req, res) => {
   res.render('register')
 })
 
+// 登出
+router.get('/logout', (req, res) => {
+  req.logout()
+  res.redirect('/users/login')
+})
 
 module.exports = router
