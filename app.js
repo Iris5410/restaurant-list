@@ -17,6 +17,9 @@ const app = express()
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
+// setting static files
+app.use(express.static('public'))
+
 app.use(session({
   secret: 'ThisIsMySecret',
   resave: false,
@@ -29,9 +32,6 @@ app.use(methodOvervide('_method'))
 usePassport(app)
 
 app.use(routes)
-
-// setting static files
-app.use(express.static('public'))
 
 
 app.listen(port, () => {
