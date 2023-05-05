@@ -31,6 +31,13 @@ app.use(methodOvervide('_method'))
 
 usePassport(app)
 
+// 所有路由裡 設定兩個由req交接給res的變數
+app.use((req, res, next) => {
+  res.locals.isAuthenticated = req.isAuthenticated()
+  res.locals.user = req.user
+  next()
+})
+
 app.use(routes)
 
 
