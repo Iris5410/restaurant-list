@@ -2,12 +2,12 @@
 <div class="container">
   <div class="row">
     <div class="col-12 col-md-10 mx-auto">
-      <a href="/restaurants/{{restaurant._id}}/edit">Edit</a>
-      <a href="/">Back</a>
+      <a href="/restaurants/{{restaurant._id}}/edit" class="btn btn-outline-dark">Edit</a>
+      <a href="/" class="btn btn-outline-dark">Back</a>
       <form action="/restaurants/{{restaurant._id}}?_method=DELETE" method="POST" style="display:inline">
-        <button type="submit">Delete</button>
+        <button type="submit" class="btn btn-danger">Delete</button>
       </form>
-      <p class="mb-1">
+      <p class="mb-1 mt-3">
         <span class="text-secondary">
           <i class="fas fa-utensils pr-2"></i>
           類別：
