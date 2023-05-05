@@ -3,6 +3,7 @@ const session = require('express-session')
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 const methodOvervide = require('method-override')
+const flash = require('connect-flash')
 
 const routes = require('./routes')
 
@@ -31,10 +32,14 @@ app.use(methodOvervide('_method'))
 
 usePassport(app)
 
+app.use(flash())
+
 // 所有路由裡 設定兩個由req交接給res的變數
 app.use((req, res, next) => {
   res.locals.isAuthenticated = req.isAuthenticated()
   res.locals.user = req.user
+  res.locals.success_msg = req.flash('success_msg')
+  res.locals.warning_msg = req.flash('warning_msg')
   next()
 })
 
